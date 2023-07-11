@@ -16,7 +16,7 @@ export class Sidenav extends Component {
   render() {
     return (
       <div>
-         <div className="sideNav">
+         <div className="sideNav pt-2  bg-danger bg-gradient text-white">
                         <div className="navIcon">
                             <FaHouseUser />
                         </div>
