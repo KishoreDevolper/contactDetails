@@ -30,7 +30,11 @@ export class Topnav extends Component {
               <FaEnvelope />
             </a>
 
+<<<<<<< HEAD
             <a href="#" className="link-dark  p-3">MarkHenry</a>
+=======
+            <a href="#" className="link-dark p-3">MarkHenry</a>
+>>>>>>> 4b3ad44eaa076b64c535442a425ee0ba7eced74a
             <a className="navLinks pt-3">
               <FaRegBell />
             </a>
@@ -41,4 +45,8 @@ export class Topnav extends Component {
   }
 }
 
+<<<<<<< HEAD
 export default Topnav;
+=======
+export default Topnav;
+>>>>>>> 4b3ad44eaa076b64c535442a425ee0ba7eced74a
