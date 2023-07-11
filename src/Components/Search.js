@@ -27,6 +27,7 @@ function Search() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [arrName, setArrNAme] = useState([]);
+  let id = Math.floor(100000 + Math.random() * 900000);
   const Save = () => {
     setArrNAme([
       ...arrName,
@@ -36,10 +37,27 @@ function Search() {
         company,
         phone,
         address,
+        id,
       },
     ]);
+    setName("");
+    setAddress("");
+    setCompany("");
+    setEmail("");
+    setPhone("");
     handleClose();
   };
+
+  const handleDelete = (inputValue) => {
+    let find = arrName.filter((savedValue) => savedValue.id !== inputValue);
+    setArrNAme(find);
+  };
+  const handleEdit = (x) => {
+    let find = arrName.filter((savedValue) => savedValue.id == x?.id);
+    console.log(find);
+    
+  };
+
   return (
     <div>
       <div className="d-flex">
@@ -62,56 +80,55 @@ function Search() {
               <Modal.Title>FILL THE DETAILS</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label>FULL NAME</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Label>FULL NAME</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
 
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="name@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    autoFocus
-                  />
-                  <Form.Label>PHONE NUMBER</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder=""
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    autoFocus
-                  />
-                  <Form.Label>COMPANY</Form.Label>
-                  <Form.Control
-                    type="text"
-                    value={company}
-                    placeholder=""
-                    onChange={(e) => setCompany(e.target.value)}
-                    autoFocus
-                  />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3"
-                  controlId="exampleForm.ControlTextarea1"
-                >
-                  <Form.Label>ADDRESS</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={2}
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                  />
-                </Form.Group>
-              </Form>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="name@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoFocus
+                />
+                <Form.Label>PHONE NUMBER</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder=""
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  autoFocus
+                />
+                <Form.Label>COMPANY</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={company}
+                  placeholder=""
+                  onChange={(e) => setCompany(e.target.value)}
+                  autoFocus
+                />
+              </Form.Group>
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <Form.Label>ADDRESS</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={2}
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </Form.Group>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
@@ -143,12 +160,17 @@ function Search() {
             {arrName.map((x) => {
               return (
                 <tr>
-                  <td><div className="d-flex justify-content-center">
-                  <div className="p-1"><FaEdit /></div>
-                    <div className="p-1"><FaTrash /></div>
-                  </div>
-                    
+                  <td>
+                    <div className="d-flex justify-content-center">
+                      <div className="p-1" onClick={() => handleEdit(x)}>
+                        <FaEdit />
+                      </div>
+                      <div className="p-1 " onClick={() => handleDelete(x.id)}>
+                        <FaTrash />
+                      </div>
+                    </div>
                   </td>
+
                   <td>
                     <div>{x.name}</div>
                     <div>{x.email}</div>
