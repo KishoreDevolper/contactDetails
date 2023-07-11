@@ -29,23 +29,25 @@ function Search() {
   const [arrName, setArrNAme] = useState([]);
   let id = Math.floor(100000 + Math.random() * 900000);
   const Save = () => {
-    setArrNAme([
-      ...arrName,
-      {
-        name,
-        email,
-        company,
-        phone,
-        address,
-        id,
-      },
-    ]);
-    setName("");
-    setAddress("");
-    setCompany("");
-    setEmail("");
-    setPhone("");
-    handleClose();
+    if (name.trim() !== "") {
+      setArrNAme([
+        ...arrName,
+        {
+          name,
+          email,
+          company,
+          phone,
+          address,
+          id,
+        },
+      ]);
+      setName("");
+      setAddress("");
+      setCompany("");
+      setEmail("");
+      setPhone("");
+      handleClose();
+    }
   };
 
   const handleDelete = (inputValue) => {
@@ -54,8 +56,7 @@ function Search() {
   };
   const handleEdit = (x) => {
     let find = arrName.filter((savedValue) => savedValue.id == x?.id);
-    console.log(find);
-    
+    console.log(find.name);
   };
 
   return (
